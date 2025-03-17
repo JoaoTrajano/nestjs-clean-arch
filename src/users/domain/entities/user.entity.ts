@@ -20,7 +20,7 @@ export class UserEntity extends Entity<UserProps> {
     this.props.name = name
   }
 
-  updatePasswprd(password: string): void {
+  updatePassword(password: string): void {
     this.props.password = password
   }
 

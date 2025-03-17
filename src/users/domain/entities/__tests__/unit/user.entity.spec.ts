@@ -16,25 +16,35 @@ describe('User Entity unit test', () => {
     expect(sut.props.createdAt).toBeInstanceOf(Date)
   })
 
-  it('it should get the name of the user by the Getter accessor method', () => {
+  it('should get the name of the user by the Getter accessor method', () => {
     expect(sut.name).toBeDefined()
     expect(sut.name).toBe(props.name)
     expect(typeof sut.name).toBe('string')
   })
 
-  it('it should get the email of the user by the Getter accessor method', () => {
+  it('should update the name of the user', () => {
+    sut.updateName('new name')
+    expect(sut.name).toBe('new name')
+  })
+
+  it('should update the password of the user', () => {
+    sut.updatePassword('new password')
+    expect(sut.password).toBe('new password')
+  })
+
+  it('should get the email of the user by the Getter accessor method', () => {
     expect(sut.email).toBeDefined()
     expect(sut.email).toBe(props.email)
     expect(typeof sut.email).toBe('string')
   })
 
-  it('it should get the password of the user by the Getter accessor method', () => {
+  it('should get the password of the user by the Getter accessor method', () => {
     expect(sut.password).toBeDefined()
     expect(sut.password).toBe(props.password)
     expect(typeof sut.password).toBe('string')
   })
 
-  it('it should get the createdAt field by the Getter accessor method', () => {
+  it('should get the createdAt field by the Getter accessor method', () => {
     expect(sut.createdAt).toBeDefined()
     expect(sut.createdAt).toBeInstanceOf(Date)
   })
