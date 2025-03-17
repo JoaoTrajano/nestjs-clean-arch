@@ -61,4 +61,15 @@ describe('ClassValidatorFields', () => {
       field: ['field should not be empty'],
     })
   })
+
+  it('should validate without errors', () => {
+    const validateSyncSpyOn = jest.spyOn(libClassValidator, 'validateSync')
+    validateSyncSpyOn.mockReturnValue([])
+
+    const dto = Object.assign(new MyDTO(), { field: 'value1' })
+
+    expect(sut.validate(dto)).toBe(true)
+    expect(sut.validatedData).toBe(dto)
+    expect(sut.errors).toBeNull()
+  })
 })
