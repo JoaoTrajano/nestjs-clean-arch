@@ -10,8 +10,8 @@ export abstract class ClassValidatorFields<PropsValidated>
   errors: FieldsErros = null
   validatedData: PropsValidated = null
 
-  validate(data: any): boolean {
-    const errors = validateSync(data)
+  validate(data: PropsValidated): boolean {
+    const errors = validateSync(data as object)
 
     if (errors.length) {
       this.errors = {}

@@ -2,14 +2,12 @@ import { ClassValidatorFields } from '../../class-validator-fields'
 import * as libClassValidator from 'class-validator'
 import { IsNotEmpty } from 'class-validator'
 
-class MyDTO {
+class StubRules {
   @IsNotEmpty()
   field: string
 }
 
-class StubClassValidatorFields extends ClassValidatorFields<{
-  field: string
-}> {}
+class StubClassValidatorFields extends ClassValidatorFields<StubRules> {}
 
 describe('ClassValidatorFields', () => {
   let sut: StubClassValidatorFields
@@ -37,7 +35,7 @@ describe('ClassValidatorFields', () => {
       },
     ])
 
-    const dto = Object.assign(new MyDTO(), { field: '' })
+    const dto = Object.assign(new StubRules(), { field: '' })
 
     expect(sut.validate(dto)).toBe(false)
     expect(sut.validatedData).toBeNull()
@@ -47,14 +45,14 @@ describe('ClassValidatorFields', () => {
   })
 
   it('should validate data', () => {
-    const dto = Object.assign(new MyDTO(), { field: 'value1' })
+    const dto = Object.assign(new StubRules(), { field: 'value1' })
 
     expect(sut.validate(dto)).toBe(true)
     expect(sut.validatedData).toEqual(dto)
   })
 
   it('should not validate data', () => {
-    const dto = Object.assign(new MyDTO(), { field: '' })
+    const dto = Object.assign(new StubRules(), { field: '' })
 
     expect(sut.validate(dto)).toBe(false)
     expect(sut.errors).toEqual({
@@ -66,7 +64,7 @@ describe('ClassValidatorFields', () => {
     const validateSyncSpyOn = jest.spyOn(libClassValidator, 'validateSync')
     validateSyncSpyOn.mockReturnValue([])
 
-    const dto = Object.assign(new MyDTO(), { field: 'value1' })
+    const dto = Object.assign(new StubRules(), { field: 'value1' })
 
     expect(sut.validate(dto)).toBe(true)
     expect(sut.validatedData).toBe(dto)
