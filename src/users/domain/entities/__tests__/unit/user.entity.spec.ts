@@ -1,3 +1,4 @@
+import { UserValidator } from '@/users/domain/validators/user.validator'
 import { UserEntity, UserProps } from '../../user.entity'
 import { UserDataBuilder } from '@/users/domain/testing/helpers/user-data-builder'
 describe('User Entity unit test', () => {
@@ -5,10 +6,12 @@ describe('User Entity unit test', () => {
   let props: UserProps
 
   beforeEach(() => {
+    UserEntity.userValidator = jest.fn()
     props = UserDataBuilder({})
     sut = new UserEntity(props)
   })
   it('should create a user entity', () => {
+    expect(UserEntity.userValidator).toHaveBeenCalled()
     expect(sut).toBeInstanceOf(UserEntity)
     expect(sut.props.name).toBe(props.name)
     expect(sut.props.email).toBe(props.email)
@@ -23,11 +26,13 @@ describe('User Entity unit test', () => {
   })
 
   it('should update the name of the user', () => {
+    expect(UserEntity.userValidator).toHaveBeenCalled()
     sut.updateName('new name')
     expect(sut.name).toBe('new name')
   })
 
   it('should update the password of the user', () => {
+    expect(UserEntity.userValidator).toHaveBeenCalled()
     sut.updatePassword('new password')
     expect(sut.password).toBe('new password')
   })
