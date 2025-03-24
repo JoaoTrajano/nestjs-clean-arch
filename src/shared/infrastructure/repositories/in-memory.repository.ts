@@ -14,8 +14,10 @@ export abstract class InMemoryRepository<E extends Entity>
     return await this.insert(entity)
   }
 
-  async delete(id: string): Promise<void> {
-    await this._get(id)
+  async delete(id: string): Promise<void | null> {
+    const entity = await this._get(id)
+    if (!entity) return null
+
     this.items = this.items.filter(item => item._id !== id)
   }
 
