@@ -19,4 +19,6 @@ export class UserInMemoryRepository
 
     return true
   }
+
+  async search(props: any): Promise<any> {}
 }

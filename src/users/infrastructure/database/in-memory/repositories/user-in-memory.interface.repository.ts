@@ -1,8 +1,8 @@
 import { UserEntity } from '@/users/domain/entities/user.entity'
-import { RepositoryInterface } from '@/shared/infrastructure/repositories/repository.interface'
+import { SearchableRepositoryInterface } from '@/shared/infrastructure/repositories/searchable-repository.interface'
 
 export interface UserInMemoryRepositoryInterface
-  extends RepositoryInterface<UserEntity> {
+  extends SearchableRepositoryInterface<UserEntity, any, any> {
   findByEmail(email: string): Promise<UserEntity | null>
   emailExists(email: string): Promise<boolean>
 }
